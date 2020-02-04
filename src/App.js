@@ -26,8 +26,8 @@ class App extends Component {
         </header>
 
         <div>
-          <p>Name: {this.state.people.key_name}</p>
-          <p>Data: {this.state.people.data}</p>
+          <p><b>Name:</b> {this.state.people.key_name}</p>
+          <p><b>Data:</b> {this.state.people.data}</p>
         </div>
       </div>
 
