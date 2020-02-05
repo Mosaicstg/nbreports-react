@@ -14,7 +14,7 @@ class App extends Component {
     fetch('http://localhost/wp_nbreports/wp-json/nbtools/v1/nbpeople?per_page=100')
       .then(resp => resp.json())
       .then(data => this.setState((prevState, props) => {
-        return { people:data};
+        return { people: data[0]};
       }))
   }
 
@@ -26,8 +26,8 @@ class App extends Component {
         </header>
 
         <div>
-          <p><b>Name:</b> {this.state.people.key_name}</p>
-          <p><b>Data:</b> {this.state.people.data}</p>
+          <p>{this.state.people.key_name}</p>
+          <p>{this.state.people.data}</p>
         </div>
       </div>
 
