@@ -26,6 +26,17 @@ class App extends Component {
   }
 
   render () {
+
+    let dropdownItems;
+
+    if (this.state.nations.length > 0) {
+      dropdownItems = this.state.nations.map(nation => (
+        <Dropdown.Item key={nation.id} href="#">
+          {nation.title.rendered}
+        </Dropdown.Item>
+      ));
+    }
+
     return (
       <div className="App">
         <header className="App-header">
@@ -39,9 +50,7 @@ class App extends Component {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+              { dropdownItems }
             </Dropdown.Menu>
           </Dropdown>
         </div>
