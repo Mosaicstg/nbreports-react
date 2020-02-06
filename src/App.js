@@ -10,7 +10,8 @@ class App extends Component {
     this.state = {
       nations: {},
       nationUrl: "",
-      nationToken: ""
+      nationToken: "",
+      reportsWanted: []
     }
   }
 
@@ -27,11 +28,21 @@ class App extends Component {
       this.setState( {
         nationUrl: url,
         nationToken: token
-      } )
-    }
+      })
+    };
+
+    const handleReportsSubmit = checked => {
+      this.setState({
+        reportsWanted: checked
+      })
+    };
 
     if ( this.state.nationUrl.length > 0 && this.state.nationToken.length > 0 ) {
-      reportOptions = <ReportOptions url={this.state.nationUrl} token={this.state.nationToken} />
+      reportOptions = <ReportOptions
+        url={this.state.nationUrl}
+        token={this.state.nationToken}
+        handleSubmit={handleReportsSubmit}
+      />
     }
 
     return (
