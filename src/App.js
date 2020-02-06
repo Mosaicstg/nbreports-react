@@ -4,8 +4,8 @@ import NationsDropdown from './containers/NationsDropdown';
 
 class App extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       nations: {}
     }
