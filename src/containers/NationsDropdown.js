@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
+import ReportOptions from './ReportOptions';
 
 class NationsDropdown extends Component {
 
@@ -13,6 +14,7 @@ class NationsDropdown extends Component {
 
   render () {
     let dropdownItems;
+    let reportOptions;
 
     const handleClick = ( url, token ) => {
       this.setState( {
@@ -33,10 +35,20 @@ class NationsDropdown extends Component {
       ));
     }
 
+    if (this.state.nationUrl.length > 0 && this.state.nationToken.length > 0) {
+      reportOptions = <ReportOptions />
+    }
+
     return (
-      <DropdownButton id="dropdown-title" title="Choose a nation">
-        {dropdownItems}
-      </DropdownButton>
+      <div>
+        <DropdownButton id="dropdown-title" title="Choose a nation">
+          {dropdownItems}
+        </DropdownButton>
+
+        <div>
+          {reportOptions}
+        </div>
+      </div>
     )
 
   }
