@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import NationsDropdown from './containers/NationsDropdown';
 import ReportOptions from './containers/ReportOptions';
+import Report from './containers/Report';
 
 class App extends Component {
 
@@ -23,6 +24,7 @@ class App extends Component {
 
   render() {
     let reportOptions;
+    let report;
 
     const handleDropdownClick = ( url, token ) => {
       this.setState( {
@@ -38,11 +40,19 @@ class App extends Component {
     };
 
     if ( this.state.nationUrl.length > 0 && this.state.nationToken.length > 0 ) {
-      reportOptions = <ReportOptions
-        url={this.state.nationUrl}
-        token={this.state.nationToken}
-        handleSubmit={handleReportsSubmit}
-      />
+      reportOptions = (
+        <div className="report-options">
+          <ReportOptions
+            url={this.state.nationUrl}
+            token={this.state.nationToken}
+            handleSubmit={handleReportsSubmit}
+          />
+        </div>
+      );
+    }
+
+    if ( this.state.reportsWanted.length > 0 ) {
+      report = <Report reportsWanted={this.state.reportsWanted} />
     }
 
     return (
@@ -56,12 +66,10 @@ class App extends Component {
           <NationsDropdown nations={this.state.nations} handleClick={handleDropdownClick} />
         </div>
 
-        <div className="report-options">
-          {reportOptions}
-        </div>
+        {reportOptions}
+        {report}
 
       </div>
-
     );
   }
 

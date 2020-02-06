@@ -39,6 +39,8 @@ class ReportOptions extends Component {
             <div className="checkboxes">
               <Form.Check type="checkbox" id="people" label="People" onChange={handleChange} />
               <Form.Check type="checkbox" id="lists" label="Lists" onChange={handleChange} />
+              <Form.Check type="checkbox" id="filters" label="Filters" onChange={handleChange} />
+              <Form.Check type="checkbox" id="tags" label="Tags" onChange={handleChange} />
             </div>
             <div className="submit">
               <Button type="submit">Pull reports</Button>
