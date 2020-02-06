@@ -52,7 +52,11 @@ class App extends Component {
     }
 
     if ( this.state.reportsWanted.length > 0 ) {
-      report = <Report reportsWanted={this.state.reportsWanted} />
+      report = <Report
+        url={this.state.nationUrl}
+        token={this.state.nationToken}
+        reportsWanted={this.state.reportsWanted}
+      />
     }
 
     return (
