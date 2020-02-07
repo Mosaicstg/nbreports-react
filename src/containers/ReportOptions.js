@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ApiOptions from './ApiOptions';
 import { Form, Button, Col } from 'react-bootstrap';
 
 class ReportOptions extends Component {
@@ -14,41 +15,41 @@ class ReportOptions extends Component {
   render () {
 
     const checkboxes = [
-      {id: "contact-single", label: "Single person's contacts"},
-      {id: "donations", label: "All donations"},
-      {id: "donations-search", label: "Search donations"},
-      {id: "events", label: "All events"},
-      {id: "event-single", label: "One event"},
-      {id: "event-rsvps", label: "Single event's RSVPs"},
-      {id: "lists", label: "All lists"},
-      {id: "list-people", label: "People associated with a list"},
-      {id: "membership-single", label: "Single person's memberships"},
-      {id: "paths", label: "All paths"},
-      {id: "people", label: "All people"},
-      {id: "people-count", label: "People count"},
-      {id: "tags", label: "All people tags"},
-      {id: "tag-people", label: "People associated with a tag"}
+      {id: "contact-single", label: "Single person's contacts", options: true},
+      {id: "donations", label: "All donations", options: false},
+      {id: "donations-search", label: "Search donations", options: true},
+      {id: "events", label: "All events", options: true},
+      {id: "event-single", label: "One event", options: true},
+      {id: "event-rsvps", label: "Single event's RSVPs", options: true},
+      {id: "lists", label: "All lists", options: false},
+      {id: "list-people", label: "People associated with a list", options: true},
+      {id: "membership-single", label: "Single person's memberships", options: true},
+      {id: "paths", label: "All paths", options: false},
+      {id: "people", label: "All people", options: false},
+      {id: "people-count", label: "People count", options: false},
+      {id: "tags", label: "All people tags", options: false},
+      {id: "tag-people", label: "People associated with a tag", options: true}
     ];
 
     const generateCheckboxes = checkboxes => {
       const colOne = checkboxes.slice(0, 7).map(checkbox => {
-        return <Form.Check
-          type="checkbox"
-          key={checkbox.id}
-          id={checkbox.id}
-          label={checkbox.label}
-          onChange={handleChange}
-        />
+        return (
+          <>
+            <Form.Check type="checkbox" key={checkbox.id} id={checkbox.id} label={checkbox.label} onChange={handleChange} />
+
+            { checkbox.options ? <ApiOptions id={checkbox.id} /> : null }
+          </>
+        )
       });
 
       const colTwo = checkboxes.slice(7).map(checkbox => {
-        return <Form.Check
-          type="checkbox"
-          key={checkbox.id}
-          id={checkbox.id}
-          label={checkbox.label}
-          onChange={handleChange}
-        />
+        return (
+          <>
+            <Form.Check type="checkbox" key={checkbox.id} id={checkbox.id} label={checkbox.label} onChange={handleChange} />
+
+            { checkbox.options ? <ApiOptions id={checkbox.id} /> : null }
+          </>
+        )
       });
 
       return (

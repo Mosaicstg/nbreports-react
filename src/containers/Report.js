@@ -60,7 +60,7 @@ class Report extends Component {
         .then( resp => resp.json() )
         .then( data => this.setState( { tags: data } ) )
     }
-    
+
   }
 
   render () {
