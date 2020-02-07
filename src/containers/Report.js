@@ -6,24 +6,42 @@ class Report extends Component {
     super(props);
 
     this.state = {
-      people: {},
-      peopleCount: {},
-      lists: {},
-      listPeople: {},
-      tags: {},
-      tagPeople: {},
+      contactSingle: {},
       donations: {},
-      searchDonations: {},
+      donationsSearch: {},
       events: {},
       eventSingle: {},
       eventRsvps: {},
-      contactSingle: {},
+      lists: {},
+      listPeople: {},
       membershipSingle: {},
-      paths: {}
+      paths: {},
+      people: {},
+      peopleCount: {},
+      tags: {},
+      tagPeople: {}
     }
   }
 
   componentDidMount() {
+
+    if (this.props.reportsWanted.includes("donations")) {
+      fetch( `https://cors-anywhere.herokuapp.com/${this.props.url}/api/v1/donations?access_token=${this.props.token}` )
+        .then( resp => resp.json() )
+        .then( data => this.setState( { donations: data } ) )
+    }
+
+    if (this.props.reportsWanted.includes("lists")) {
+      fetch( `https://cors-anywhere.herokuapp.com/${this.props.url}/api/v1/lists?access_token=${this.props.token}` )
+        .then( resp => resp.json() )
+        .then( data => this.setState( { lists: data } ) )
+    }
+
+    if (this.props.reportsWanted.includes("paths")) {
+      fetch( `https://cors-anywhere.herokuapp.com/${this.props.url}/api/v1/paths?access_token=${this.props.token}` )
+        .then( resp => resp.json() )
+        .then( data => this.setState( { paths: data } ) )
+    }
 
     if (this.props.reportsWanted.includes("people")) {
       fetch( `https://cors-anywhere.herokuapp.com/${this.props.url}/api/v1/people?access_token=${this.props.token}` )
@@ -37,28 +55,10 @@ class Report extends Component {
         .then( data => this.setState( { peopleCount: data } ) )
     }
 
-    if (this.props.reportsWanted.includes("lists")) {
-      fetch( `https://cors-anywhere.herokuapp.com/${this.props.url}/api/v1/lists?access_token=${this.props.token}` )
-        .then( resp => resp.json() )
-        .then( data => this.setState( { lists: data } ) )
-    }
-
     if (this.props.reportsWanted.includes("tags")) {
       fetch( `https://cors-anywhere.herokuapp.com/${this.props.url}/api/v1/tags?access_token=${this.props.token}` )
         .then( resp => resp.json() )
         .then( data => this.setState( { tags: data } ) )
-    }
-
-    if (this.props.reportsWanted.includes("donations")) {
-      fetch( `https://cors-anywhere.herokuapp.com/${this.props.url}/api/v1/donations?access_token=${this.props.token}` )
-        .then( resp => resp.json() )
-        .then( data => this.setState( { donations: data } ) )
-    }
-
-    if (this.props.reportsWanted.includes("paths")) {
-      fetch( `https://cors-anywhere.herokuapp.com/${this.props.url}/api/v1/paths?access_token=${this.props.token}` )
-        .then( resp => resp.json() )
-        .then( data => this.setState( { paths: data } ) )
     }
     
   }

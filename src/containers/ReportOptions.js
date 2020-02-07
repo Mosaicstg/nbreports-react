@@ -14,20 +14,20 @@ class ReportOptions extends Component {
   render () {
 
     const checkboxes = [
-      {id: "people", label: "All people"},
-      {id: "people-count", label: "People count"},
-      {id: "lists", label: "All lists"},
-      {id: "list-people", label: "People associated with a list"},
-      {id: "tags", label: "All people tags"},
-      {id: "tag-people", label: "People associated with a tag"},
+      {id: "contact-single", label: "Single person's contacts"},
       {id: "donations", label: "All donations"},
-      {id: "search-donations", label: "Search donations"},
+      {id: "donations-search", label: "Search donations"},
       {id: "events", label: "All events"},
       {id: "event-single", label: "One event"},
       {id: "event-rsvps", label: "Single event's RSVPs"},
-      {id: "contact-single", label: "Single person's contacts"},
+      {id: "lists", label: "All lists"},
+      {id: "list-people", label: "People associated with a list"},
       {id: "membership-single", label: "Single person's memberships"},
-      {id: "paths", label: "All paths"}
+      {id: "paths", label: "All paths"},
+      {id: "people", label: "All people"},
+      {id: "people-count", label: "People count"},
+      {id: "tags", label: "All people tags"},
+      {id: "tag-people", label: "People associated with a tag"}
     ];
 
     const generateCheckboxes = checkboxes => {
