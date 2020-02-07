@@ -40,7 +40,7 @@ class ReportOptions extends Component {
           onChange={handleChange}
         />
       });
-      
+
       const colTwo = checkboxes.slice(7).map(checkbox => {
         return <Form.Check
           type="checkbox"
