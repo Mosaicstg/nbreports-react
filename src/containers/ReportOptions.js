@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Col } from 'react-bootstrap';
 
 class ReportOptions extends Component {
 
@@ -31,7 +31,7 @@ class ReportOptions extends Component {
     ];
 
     const generateCheckboxes = checkboxes => {
-      return checkboxes.map(checkbox => {
+      const colOne = checkboxes.slice(0, 7).map(checkbox => {
         return <Form.Check
           type="checkbox"
           key={checkbox.id}
@@ -40,6 +40,23 @@ class ReportOptions extends Component {
           onChange={handleChange}
         />
       });
+      
+      const colTwo = checkboxes.slice(7).map(checkbox => {
+        return <Form.Check
+          type="checkbox"
+          key={checkbox.id}
+          id={checkbox.id}
+          label={checkbox.label}
+          onChange={handleChange}
+        />
+      });
+
+      return (
+        <Form.Row>
+          <Col>{colOne}</Col>
+          <Col>{colTwo}</Col>
+        </Form.Row>
+      );
     };
 
     const handleChange = e => {
