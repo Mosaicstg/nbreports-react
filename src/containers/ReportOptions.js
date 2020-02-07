@@ -13,7 +13,36 @@ class ReportOptions extends Component {
 
   render () {
 
-    const handleChange= e => {
+    const checkboxes = [
+      {id: "people", label: "All people"},
+      {id: "people-count", label: "People count"},
+      {id: "lists", label: "All lists"},
+      {id: "list-people", label: "People associated with a list"},
+      {id: "tags", label: "All people tags"},
+      {id: "tag-people", label: "People associated with a tag"},
+      {id: "donations", label: "All donations"},
+      {id: "search-donations", label: "Search donations"},
+      {id: "events", label: "All events"},
+      {id: "event-single", label: "One event"},
+      {id: "event-rsvps", label: "Single event's RSVPs"},
+      {id: "contact-single", label: "Single person's contacts"},
+      {id: "membership-single", label: "Single person's memberships"},
+      {id: "paths", label: "All paths"}
+    ];
+
+    const generateCheckboxes = checkboxes => {
+      return checkboxes.map(checkbox => {
+        return <Form.Check
+          type="checkbox"
+          key={checkbox.id}
+          id={checkbox.id}
+          label={checkbox.label}
+          onChange={handleChange}
+        />
+      });
+    };
+
+    const handleChange = e => {
       let checked = this.state.reportsWanted;
 
       if (e.target.checked) {
@@ -37,20 +66,7 @@ class ReportOptions extends Component {
 
         <Form onSubmit={e => { e.preventDefault(); this.props.handleSubmit(this.state.reportsWanted)} }>
             <div className="checkboxes">
-              <Form.Check type="checkbox" id="people" label="All people" onChange={handleChange} />
-              <Form.Check type="checkbox" id="people-count" label="People count" onChange={handleChange} />
-              <Form.Check type="checkbox" id="lists" label="All lists" onChange={handleChange} />
-              <Form.Check type="checkbox" id="lists-people" label="People associated with a list" onChange={handleChange} />
-              <Form.Check type="checkbox" id="tags" label="All people tags" onChange={handleChange} />
-              <Form.Check type="checkbox" id="tag-people" label="People associated with a tag" onChange={handleChange} />
-              <Form.Check type="checkbox" id="donations" label="All donations" onChange={handleChange} />
-              <Form.Check type="checkbox" id="search-donations" label="Search donations" onChange={handleChange} />
-              <Form.Check type="checkbox" id="events" label="All Events" onChange={handleChange} />
-              <Form.Check type="checkbox" id="events-single" label="One event" onChange={handleChange} />
-              <Form.Check type="checkbox" id="events-rsvps" label="Single event's RSVPs" onChange={handleChange} />
-              <Form.Check type="checkbox" id="contacts-single" label="Single person's contacts" onChange={handleChange} />
-              <Form.Check type="checkbox" id="memberships-single" label="Single person's memberships" onChange={handleChange} />
-              <Form.Check type="checkbox" id="paths" label="All paths" onChange={handleChange} />
+              { generateCheckboxes(checkboxes) }
             </div>
             <div className="submit">
               <Button type="submit">Pull reports</Button>
