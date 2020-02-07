@@ -6,6 +6,19 @@ class Report extends Component {
     super(props);
 
     this.state = {
+      people: {},
+      peopleCount: {},
+      lists: {},
+      listPeople: {},
+      tags: {},
+      tagPeople: {},
+      donations: {},
+      searchDonations: {},
+      events: {},
+      eventSingle: {},
+      eventRsvps: {},
+      contactSingle: {},
+      membershipSingle: {},
       paths: {}
     }
   }
