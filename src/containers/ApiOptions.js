@@ -5,7 +5,7 @@ function ApiOptions( props ) {
 
   let apiForm;
 
-  if (props.id === "contact-single") {
+  if (props.id === "contact-single" || props.id === "list-people" || props.id === "membership-single") {
     apiForm = (
       <Form><Form.Control size="sm" type="text" id={props.id} placeholder="Person's id" /></Form>
     )
@@ -47,6 +47,12 @@ function ApiOptions( props ) {
           </Col>
         </Form.Row>
       </Form>
+    )
+  }
+
+  if (props.id === "tag-people") {
+    apiForm = (
+      <Form><Form.Control size="sm" type="text" id={props.id} placeholder="Name of the tag" /></Form>
     )
   }
 
