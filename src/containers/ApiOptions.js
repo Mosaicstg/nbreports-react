@@ -5,15 +5,18 @@ function ApiOptions( props ) {
 
   let apiForm;
 
-  if (props.id === "contact-single" || props.id === "list-people" || props.id === "membership-single") {
+  if (props.id === "contactSingle" || props.id === "listPeople" || props.id === "membershipSingle") {
+    //debugger;
+    // Passing names of needed params from ReportOptions in props (props.params)
+    // This is an object - would like to give the form field an attribute matching each param name so that handleChange
+    // can then use that to update the state back in ReportOptions
     apiForm = (
-      <Form><Form.Control size="sm" type="text" id={props.id} placeholder="Person's id" /></Form>
+      <Form.Control size="sm" type="text" id={props.id} placeholder="Person's id" onChange={props.handleChange} />
     )
   }
 
-  if (props.id === "donations-search") {
+  if (props.id === "donationsSearch") {
     apiForm = (
-      <Form>
         <Form.Row>
           <Col>
             <Form.Control size="sm" type="text" id={props.id} placeholder="Created since" />
@@ -25,19 +28,17 @@ function ApiOptions( props ) {
             <Form.Control size="sm" type="text" id={props.id} placeholder="Failed since" />
           </Col>
         </Form.Row>
-      </Form>
     )
   }
 
   if (props.id === "events") {
     apiForm = (
-      <Form><Form.Control size="sm" type="text" id={props.id} placeholder="Site slug" /></Form>
+      <Form.Control size="sm" type="text" id={props.id} placeholder="Site slug" />
     )
   }
 
-  if (props.id === "event-single" || props.id === "event-rsvps") {
+  if (props.id === "eventSingle" || props.id === "eventRsvps") {
     apiForm = (
-      <Form>
         <Form.Row>
           <Col>
             <Form.Control size="sm" type="text" id={props.id} placeholder="Site slug" />
@@ -46,13 +47,12 @@ function ApiOptions( props ) {
             <Form.Control size="sm" type="text" id={props.id} placeholder="Event ID" />
           </Col>
         </Form.Row>
-      </Form>
     )
   }
 
-  if (props.id === "tag-people") {
+  if (props.id === "tagPeople") {
     apiForm = (
-      <Form><Form.Control size="sm" type="text" id={props.id} placeholder="Name of the tag" /></Form>
+      <Form.Control size="sm" type="text" id={props.id} placeholder="Name of the tag" />
     )
   }
 
