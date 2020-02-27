@@ -164,11 +164,21 @@ class ReportOptions extends Component {
       }))
     };
 
+    const handleFormSubmit = () => {
+      let objs = [];
+      Object.keys(this.state).forEach ( key => {
+        if (this.state[key].requested) {
+          objs.push({name: key, params: this.state[key].params})
+        }
+      });
+
+      return objs;
+    };
+
     return (
       <div className="report-options">
         <h3>What types of reports do you need for {this.props.url}?</h3>
-        {/*Submit is broken now because reportsWanted doesn't exist in the state anymore*/}
-        <Form onSubmit={e => { e.preventDefault(); this.props.handleSubmit(this.state.reportsWanted)} }>
+        <Form onSubmit={e => { e.preventDefault(); this.props.handleSubmit(handleFormSubmit())} }>
             <div className="checkboxes">
               { generateCheckboxes(checkboxes) }
             </div>
