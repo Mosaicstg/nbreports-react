@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ApiOptions from './ApiOptions';
 import { Form, Button, Col } from 'react-bootstrap';
 
 class ReportOptions extends Component {
@@ -8,49 +7,98 @@ class ReportOptions extends Component {
     super(props);
 
     this.state = {
-      contactSingle: {requested: false, params: {id: null}},
-      donations: {requested: false},
-      donationsSearch: {requested: false, params: {createdSince: "", succeededSince: "", failedSince: ""}},
-      events: {requested: false},
-      eventSingle: {requested: false, params: {siteSlug: "", id: null}},
-      eventRsvps: {requested: false, params: {siteSlug: "", id: null}},
-      lists: {requested: false},
-      listPeople: {requested: false, params: {id: null}},
-      membershipSingle: {requested: false, params: {id: null}},
-      paths: {requested: false},
-      people: {requested: false},
-      peopleCount: {requested: false},
-      tags: {requested: false},
-      tagPeople: {requested: false, params: {tagName: ""}}
+      contactSingle: {
+        requested: false,
+        placeholders: {id: "Person's ID"},
+        params: {id: null}
+        },
+      donations: {
+        requested: false
+        },
+      donationsSearch: {
+        requested: false,
+        placeholders: {createdSince: "Created since", succeededSince: "Succeeded since", failedSince: "Failed since"},
+        params: {createdSince: "", succeededSince: "", failedSince: ""}
+        },
+      events: {
+        requested: false,
+        placeholders: {siteSlug: "Site slug"},
+        params: {siteSlug: ""}
+        },
+      eventSingle: {
+        requested: false,
+        placeholders: {siteSlug: "Site slug", id: "Event ID"},
+        params: {siteSlug: "", id: null}
+        },
+      eventRsvps: {
+        requested: false,
+        placeholders: {siteSlug: "Site slug", id: "Event ID"},
+        params: {siteSlug: "", id: null}
+        },
+      lists: {
+        requested: false
+        },
+      listPeople: {
+        requested: false,
+        placeholders: {id: "Person's ID"},
+        params: {id: ""}
+        },
+      membershipSingle: {
+        requested: false,
+        placeholders: {id: "Person's ID"},
+        params: {id: ""}
+        },
+      paths: {
+        requested: false
+        },
+      people: {
+        requested: false
+        },
+      peopleCount: {
+        requested: false
+        },
+      tags: {
+        requested: false
+        },
+      tagPeople: {
+        requested: false,
+        placeholders: {tagName: "Tag name"},
+        params: {tagName: ""}
+      }
     }
   }
 
   render () {
 
     const checkboxes = [
-      {id: "contactSingle", label: "Single person's contacts", options: true},
-      {id: "donations", label: "All donations", options: false},
-      {id: "donationsSearch", label: "Search donations", options: true},
-      {id: "events", label: "All events", options: true},
-      {id: "eventSingle", label: "One event", options: true},
-      {id: "eventRsvps", label: "Single event's RSVPs", options: true},
-      {id: "lists", label: "All lists", options: false},
-      {id: "listPeople", label: "People associated with a list", options: true},
-      {id: "membershipSingle", label: "Single person's memberships", options: true},
-      {id: "paths", label: "All paths", options: false},
-      {id: "people", label: "All people", options: false},
-      {id: "peopleCount", label: "People count", options: false},
-      {id: "tags", label: "All people tags", options: false},
-      {id: "tagPeople", label: "People associated with a tag", options: true}
+      {name: "contactSingle", label: "Single person's contacts", takesParams: true},
+      {name: "donations", label: "All donations", takesParams: false},
+      {name: "donationsSearch", label: "Search donations", takesParams: true},
+      {name: "events", label: "All events", takesParams: true},
+      {name: "eventSingle", label: "One event", takesParams: true},
+      {name: "eventRsvps", label: "Single event's RSVPs", takesParams: true},
+      {name: "lists", label: "All lists", takesParams: false},
+      {name: "listPeople", label: "People associated with a list", takesParams: true},
+      {name: "membershipSingle", label: "Single person's memberships", takesParams: true},
+      {name: "paths", label: "All paths", takesParams: false},
+      {name: "people", label: "All people", takesParams: false},
+      {name: "peopleCount", label: "People count", takesParams: false},
+      {name: "tags", label: "All people tags", takesParams: false},
+      {name: "tagPeople", label: "People associated with a tag", takesParams: true}
     ];
 
     const generateCheckboxes = checkboxes => {
       const colOne = checkboxes.slice(0, 7).map(checkbox => {
         return (
           <>
-            <Form.Check type="checkbox" key={checkbox.id} id={checkbox.id} label={checkbox.label} onChange={handleCheck} />
+            <Form.Check type="checkbox" key={checkbox.name} name={checkbox.name} label={checkbox.label} onChange={handleCheck} />
 
-            { checkbox.options ? <ApiOptions id={checkbox.id} params={this.state[checkbox.id].params} handleChange={handleChange} /> : null }
+            { checkbox.takesParams && this.state[checkbox.name].requested ?
+              <Form.Row>
+                { generateParamFields(checkbox) }
+              </Form.Row>
+              :
+              null }
           </>
         )
       });
@@ -58,9 +106,14 @@ class ReportOptions extends Component {
       const colTwo = checkboxes.slice(7).map(checkbox => {
         return (
           <>
-            <Form.Check type="checkbox" key={checkbox.id} id={checkbox.id} label={checkbox.label} onChange={handleCheck} />
+            <Form.Check type="checkbox" key={checkbox.name} name={checkbox.name} label={checkbox.label} onChange={handleCheck} />
 
-            { checkbox.options ? <ApiOptions id={checkbox.id} handleChange={handleChange} /> : null }
+            { checkbox.takesParams && this.state[checkbox.name].requested ?
+              <Form.Row>
+                { generateParamFields(checkbox) }
+              </Form.Row>
+              :
+              null }
           </>
         )
       });
@@ -73,29 +126,43 @@ class ReportOptions extends Component {
       );
     };
 
+    const generateParamFields = checkbox => {
+      return Object.keys( this.state[ checkbox.name ].params ).map( paramKey => {
+        return (
+          <Col>
+            <Form.Control size='sm' type='text' id={paramKey} name={checkbox.name} placeholder={this.state[ checkbox.name ].placeholders[paramKey]} onChange={handleChange} />
+          </Col>
+        )
+      })
+    };
+
     const handleCheck = e => {
-      // https://reactjs.org/docs/events.html#event-pooling
-      e.persist();
-      if (e.target.checked) {
+      const checked = e.target.checked;
+      const name = e.target.name;
+
+      if (checked) {
         this.setState(prevState => ({
-          [e.target.id]: { ...prevState[e.target.id], requested: true }
+          [name]: { ...prevState[name], requested: true }
         }));
       } else {
         this.setState(prevState => ({
-          [e.target.id]: { ...prevState[e.target.id], requested: false }
+          [name]: { ...prevState[name], requested: false }
         }));
       }
     };
 
     const handleChange = e => {
-      // This is where we'd update the ReportOptions state based on what's entered in the fields in ApiOptions
-      //debugger;
-      //this.setState(prevState => ({
-      //  [e.target.id]: { ...prevState[e.target.id], params: {
-      //
-      //    }}
-      //}))
-    }
+      const checkbox = e.target.name;
+      const name = e.target.id;
+      const value = e.target.value;
+
+      this.setState(prevState => ({
+        [checkbox]: { ...prevState[checkbox], params: {
+          ...prevState[checkbox].params,
+          [name]: value
+          }}
+      }))
+    };
 
     return (
       <div className="report-options">
