@@ -90,8 +90,8 @@ class ReportOptions extends Component {
     const generateCheckboxes = checkboxes => {
       const colOne = checkboxes.slice(0, 7).map(checkbox => {
         return (
-          <>
-            <Form.Check type="checkbox" key={checkbox.name} name={checkbox.name} label={checkbox.label} onChange={handleCheck} />
+          <div key={checkbox.name}>
+            <Form.Check type="checkbox" name={checkbox.name} label={checkbox.label} onChange={handleCheck} />
 
             { checkbox.takesParams && this.state[checkbox.name].requested ?
               <Form.Row>
@@ -99,14 +99,14 @@ class ReportOptions extends Component {
               </Form.Row>
               :
               null }
-          </>
+          </div>
         )
       });
 
       const colTwo = checkboxes.slice(7).map(checkbox => {
         return (
-          <>
-            <Form.Check type="checkbox" key={checkbox.name} name={checkbox.name} label={checkbox.label} onChange={handleCheck} />
+          <div key={checkbox.name}>
+            <Form.Check type="checkbox" name={checkbox.name} label={checkbox.label} onChange={handleCheck} />
 
             { checkbox.takesParams && this.state[checkbox.name].requested ?
               <Form.Row>
@@ -114,7 +114,7 @@ class ReportOptions extends Component {
               </Form.Row>
               :
               null }
-          </>
+          </div>
         )
       });
 
@@ -129,7 +129,7 @@ class ReportOptions extends Component {
     const generateParamFields = checkbox => {
       return Object.keys( this.state[ checkbox.name ].params ).map( paramKey => {
         return (
-          <Col>
+          <Col key={checkbox.name + paramKey} >
             <Form.Control size='sm' type='text' id={paramKey} name={checkbox.name} placeholder={this.state[ checkbox.name ].placeholders[paramKey]} onChange={handleChange} />
           </Col>
         )
