@@ -62,8 +62,8 @@ class ReportOptions extends Component {
         },
       tagPeople: {
         requested: false,
-        placeholders: {tagName: "Tag name"},
-        params: {tagName: ""}
+        placeholders: {tag: "Tag name"},
+        params: {tag: ""}
       }
     }
   }

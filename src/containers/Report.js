@@ -112,7 +112,7 @@ class Report extends Component {
       }
 
       if (reportWanted.name === "tagPeople") {
-        fetch( `https://cors-anywhere.herokuapp.com/${this.props.url}/api/v1/tags/${reportWanted.params.tagName}/people?access_token=${this.props.token}` )
+        fetch( `https://cors-anywhere.herokuapp.com/${this.props.url}/api/v1/tags/${reportWanted.params.tag}/people?access_token=${this.props.token}` )
           .then( resp => resp.json() )
           .then( data => this.setState( { tagPeople: data } ) )
       }
