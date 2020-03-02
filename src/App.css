@@ -1,8 +1,23 @@
 .App {
   text-align: center;
+  margin: 0 3em;
 }
 
 p {
   word-break: break-all;
   padding: 0 50px;
+}
+
+.report-options {
+  margin: 2em 0;
+}
+
+.reports {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.reports a {
+  margin: 1em;
 }

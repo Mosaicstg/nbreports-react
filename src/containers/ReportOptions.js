@@ -40,7 +40,7 @@ class ReportOptions extends Component {
         },
       listPeople: {
         requested: false,
-        placeholders: {id: "Person's ID"},
+        placeholders: {id: "List ID"},
         params: {id: ""}
         },
       membershipSingle: {
@@ -75,7 +75,7 @@ class ReportOptions extends Component {
       {name: "donations", label: "All donations", takesParams: false},
       {name: "donationsSearch", label: "Search donations", takesParams: true},
       {name: "events", label: "All events", takesParams: true},
-      {name: "eventSingle", label: "One event", takesParams: true},
+      {name: "eventSingle", label: "Single event's details", takesParams: true},
       {name: "eventRsvps", label: "Single event's RSVPs", takesParams: true},
       {name: "lists", label: "All lists", takesParams: false},
       {name: "listPeople", label: "People associated with a list", takesParams: true},
