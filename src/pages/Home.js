@@ -65,11 +65,11 @@ class Home extends Component {
 
         <header className="header">
           <h1>NationBuilder Reports</h1>
-          <Link to='/addnation'>Add nation</Link>
         </header>
 
         <div className="nations-dropdown">
           <NationsDropdown nations={this.state.nations} handleClick={handleDropdownClick} />
+          <Link to='/add-nation'>Add nation</Link>
         </div>
 
         {reportOptions}
