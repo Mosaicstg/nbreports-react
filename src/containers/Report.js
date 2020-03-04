@@ -8,33 +8,35 @@ class Report extends Component {
     super(props);
 
     this.state = {
-      contactSingle: {},
-      donations: {},
-      donationsSearch: {},
-      events: {},
-      eventSingle: {},
-      eventRsvps: {},
-      lists: {},
-      listPeople: {},
-      membershipSingle: {},
-      paths: {},
-      people: {},
-      peopleCount: {},
-      tags: {},
-      tagPeople: {}
+      contactSingle: { report: [], fileName: 'Single contact report', buttonName: 'Download the single contact report' },
+      donations: { report: [], fileName: 'Donations report', buttonName: 'Download the donations report' },
+      donationsSearch: { report: [], fileName: 'Donations search report', buttonName: 'Download the donations search report' },
+      events: { report: [], fileName: 'Events report', buttonName: 'Download the events report' },
+      eventSingle: { report: [], fileName: 'Single event report', buttonName: 'Download the single event report' },
+      eventRsvps: { report: [], fileName: 'Event RSVPs report', buttonName: 'Download the event RSVPs report' },
+      lists: { report: [], fileName: 'Lists report', buttonName: 'Download the lists report' },
+      listPeople: { report: [], fileName: 'List people report', buttonName: 'Download the list people report' },
+      membershipSingle: { report: [], fileName: 'Membership single report', buttonName: 'Download the membership single report' },
+      paths: { report: [], fileName: 'Paths report', buttonName: 'Download the paths report' },
+      people: { report: [], fileName: 'People report', buttonName: 'Download the people report' },
+      peopleCount: { report: [], fileName: 'People count report', buttonName: 'Download the people count report' },
+      tags: { report: [], fileName: 'Tags report', buttonName: 'Download the tags report' },
+      tagPeople: { report: [], fileName: 'Tag people report', buttonName: 'Download the tag people report' }
     }
   }
 
   componentDidMount() {
-    const arr = [];
+
+    let arr = [];
 
     const apiStart = `https://cors-anywhere.herokuapp.com/${this.props.url}/api/v1/`;
 
-    const apiEnd = `?access_token=${this.props.token}`;
+    const apiEnd = `?limit=100&access_token=${this.props.token}`;
+
+    let apiEndpoint;
 
     this.props.reportsWanted.forEach( reportWanted => {
       let reportName = reportWanted.name;
-      let apiEndpoint;
 
       if (reportName === 'contactSingle') {
         apiEndpoint = apiStart + `people/${reportWanted.params.id}/contacts` + apiEnd;
@@ -94,48 +96,40 @@ class Report extends Component {
 
       fetch( apiEndpoint )
         .then( resp => resp.json() )
-        .then( json => arr.concat( json.results ))
-        .then( data => Papa.unparse( data ) )
+        .then( json => {
+          if (json.results) {
+            return arr.concat( json.results );
+          } else if (json.event) {
+            return arr.concat( json.event )
+          } else {
+            return arr.concat( json )
+          }
+        })
+        .then( data => Papa.unparse( data ))
         .then( csv => {
           let csvFile = "data:text/csv;charset=utf-8," + csv;
-          this.setState( { [reportName]: csvFile } )
-        } )
+          this.setState( prevState => ({
+            [reportName]: { ...prevState[reportName], report: csvFile }
+          }))
+        })
         .catch( error => console.log( "Error: ", error ) )
-
     })
-
   }
 
   render () {
+    const reports = () => {
+      return Object.keys(this.state).map( key => {
+        if ( this.state[key].report.length > 0 ) {
+          return <Button href={this.state[key].report} key={key} variant="success" download={this.state[key].fileName}>{this.state[key].buttonName}</Button>
+        } else {
+          return null
+        }
+      })
+    };
+
     return (
       <div className="reports">
-        { this.state.contactSingle.length > 0 ? <Button href={this.state.contactSingle} variant="success" download="Single contact report">Download the single contact report</Button> : null }
-
-        { this.state.donations.length > 0 ? <Button href={this.state.donations} variant="success" download="Donations report">Download the donations report</Button> : null }
-
-        { this.state.donationsSearch.length > 0 ? <Button href={this.state.donationsSearch} variant="success" download="Donations search report">Download the donations search report</Button> : null }
-
-        { this.state.events.length > 0 ? <Button href={this.state.events} variant="success" download="Events report">Download the events report</Button> : null }
-
-        { this.state.eventSingle.length > 0 ? <Button href={this.state.eventSingle} variant="success" download="Single event report">Download the single event report</Button> : null }
-
-        { this.state.eventRsvps.length > 0 ? <Button href={this.state.eventRsvps} variant="success" download="Event RSVPs report">Download the event RSVPs report</Button> : null }
-
-        { this.state.lists.length > 0 ? <Button href={this.state.lists} variant="success" download="Lists report">Download the lists report</Button> : null }
-
-        { this.state.listPeople.length > 0 ? <Button href={this.state.listPeople} variant="success" download="List people report">Download the list people report</Button> : null }
-
-        { this.state.membershipSingle.length > 0 ? <Button href={this.state.membershipSingle} variant="success" download="Membership single report">Download the membership single report</Button> : null }
-
-        { this.state.paths.length > 0 ? <Button href={this.state.paths} variant="success" download="Paths report">Download the paths report</Button> : null }
-
-        { this.state.people.length > 0 ? <Button href={this.state.people} variant="success" download="People report">Download the people report</Button> : null }
-
-        { this.state.peopleCount.length > 0 ? <div><Button href={this.state.peopleCount} variant="success" download="People count report">Download the people count report</Button></div> : null }
-
-        { this.state.tags.length > 0 ? <Button href={this.state.tags} variant="success" download="Tags report">Download the tags report</Button> : null }
-
-        { this.state.tagPeople.length > 0 ? <Button href={this.state.tagPeople} variant="success" download="Tag people report">Download the tag people report</Button> : null }
+        { reports() }
       </div>
     )
   }
