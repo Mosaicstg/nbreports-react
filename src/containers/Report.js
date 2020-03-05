@@ -27,6 +27,41 @@ class Report extends Component {
 
   componentDidMount() {
 
+    //const fetchApi = (apiEndpoint, reportName, apiPromises) => {
+    //  let nextApiEndpoint = `https://cors-anywhere.herokuapp.com/${this.props.url}`;
+    //
+    //  fetch( apiEndpoint )
+    //    .then( resp => resp.json())
+    //    .then( json => {
+    //      if (json.results) {
+    //        apiPromises.push( json.results );
+    //      } else if (json.event) {
+    //        apiPromises.push( json.event )
+    //      } else {
+    //        apiPromises.push( json )
+    //      }
+    //
+    //      if (json.next) {
+    //        nextApiEndpoint += json.next;
+    //        nextApiEndpoint += `&access_token=${this.props.token}`;
+    //
+    //        fetchApi(nextApiEndpoint, reportName, apiPromises)
+    //      }
+    //      Promise.all(apiPromises)
+    //    })
+    //    .then( data => {
+    //      debugger
+    //      Papa.unparse( data )
+    //    })
+    //    .then( csv => {
+    //      let csvFile = "data:text/csv;charset=utf-8," + csv;
+    //      this.setState( prevState => ({
+    //        [reportName]: { ...prevState[reportName], report: csvFile }
+    //      }))
+    //    })
+    //    .catch( error => console.log( "Error: ", error ) )
+    //};
+
     let arr = [];
 
     const apiStart = `https://cors-anywhere.herokuapp.com/${this.props.url}/api/v1/`;
@@ -93,6 +128,8 @@ class Report extends Component {
       if (reportName === 'tagPeople') {
         apiEndpoint = apiStart + `tags/${reportWanted.params.tag}/people` + apiEnd;
       }
+
+      //fetchApi(apiEndpoint, reportName, [])
 
       fetch( apiEndpoint )
         .then( resp => resp.json() )
