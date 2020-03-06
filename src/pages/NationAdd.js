@@ -19,7 +19,9 @@ class NationAdd extends Component {
     };
 
     const handleSubmit = () => {
-      fetch(`http://localhost:3001/nations/authorize?slug=${this.state.slug}`)
+      fetch(`http://localhost:3001/nations?slug=${this.state.slug}`, {
+        method: 'POST'
+      })
         .then(resp => resp.json())
         .then(json => this.setState( { url: json }) )
     };
