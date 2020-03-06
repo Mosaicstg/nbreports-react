@@ -128,7 +128,6 @@ class ReportOptions extends Component {
 
     const generateParamFields = checkbox => {
       return Object.keys( this.state[ checkbox.name ].params ).map( paramKey => {
-        //debugger;
         return (
           <Col key={checkbox.name + "-" + paramKey} >
             <Form.Control size='sm' type='text' name={checkbox.name} id={paramKey.toString()} placeholder={this.state[ checkbox.name ].placeholders[paramKey]} onChange={handleChange} />
@@ -178,7 +177,7 @@ class ReportOptions extends Component {
 
     return (
       <div className="report-options">
-        <h3>What types of reports do you need for {this.props.url}?</h3>
+        <h3>What types of reports do you need for the {this.props.slug} nation?</h3>
         <Form onSubmit={e => { e.preventDefault(); this.props.handleSubmit(handleFormSubmit())} }>
             <div className="checkboxes">
               { generateCheckboxes(checkboxes) }

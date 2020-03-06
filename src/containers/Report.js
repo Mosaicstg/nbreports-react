@@ -26,41 +26,12 @@ class Report extends Component {
   }
 
   componentDidMount() {
-
-    //const fetchApi = (apiEndpoint, reportName, apiPromises) => {
-    //  let nextApiEndpoint = `https://cors-anywhere.herokuapp.com/${this.props.url}`;
-    //
-    //  fetch( apiEndpoint )
-    //    .then( resp => resp.json())
-    //    .then( json => {
-    //      if (json.results) {
-    //        apiPromises.push( json.results );
-    //      } else if (json.event) {
-    //        apiPromises.push( json.event )
-    //      } else {
-    //        apiPromises.push( json )
-    //      }
-    //
-    //      if (json.next) {
-    //        nextApiEndpoint += json.next;
-    //        nextApiEndpoint += `&access_token=${this.props.token}`;
-    //
-    //        fetchApi(nextApiEndpoint, reportName, apiPromises)
-    //      }
-    //      Promise.all(apiPromises)
-    //    })
-    //    .then( data => {
-    //      debugger
-    //      Papa.unparse( data )
-    //    })
-    //    .then( csv => {
-    //      let csvFile = "data:text/csv;charset=utf-8," + csv;
-    //      this.setState( prevState => ({
-    //        [reportName]: { ...prevState[reportName], report: csvFile }
-    //      }))
-    //    })
-    //    .catch( error => console.log( "Error: ", error ) )
-    //};
+    debugger;
+    // *Functionality is currently broken, as we are no longer passing nation tokens down*
+    // We are passing down the nation slug and the reports we want with param values via props
+    // From here, we can rework this component completely (and refactor quite a bit!)
+    // We need to make API calls to our Rails server based on the reports we want
+    // The Rails server will need to be built out with endpoints for each report
 
     let arr = [];
 
