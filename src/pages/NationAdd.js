@@ -34,10 +34,11 @@ class NationAdd extends Component {
 
         <Form onSubmit={e => { e.preventDefault(); handleSubmit() }}>
           <Form.Control size='sm' type='text' placeholder="Enter the nation's slug" onChange={handleChange} />
-          <Button type="submit">Add nation</Button>
+          <Button type="submit">Request authorization from nation (you will need to log in)</Button>
         </Form>
 
-        <a href={this.state.url}>Hello</a>
+        { this.state.url.length > 0 ? <Button href={this.state.url}>Register nation for reports</Button> : null }
+
       </div>
     )
   }
