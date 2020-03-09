@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
-import NationsDropdown from '../containers/NationsDropdown';
+import NationsDropdown from '../components/NationsDropdown';
 import ReportOptions from '../containers/ReportOptions';
 import Report from '../containers/Report';
 
