@@ -3,14 +3,10 @@ import { Form, Button } from 'react-bootstrap';
 
 class NationAdd extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      slug: '',
-      url: ''
-    }
-  }
+  state = {
+    slug: '',
+    url: ''
+  };
 
   render() {
 

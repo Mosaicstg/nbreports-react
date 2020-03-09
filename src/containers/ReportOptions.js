@@ -3,70 +3,66 @@ import { Form, Button, Col } from 'react-bootstrap';
 
 class ReportOptions extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      contactSingle: {
-        requested: false,
-        placeholders: {id: "Person's ID"},
-        params: {id: null}
-        },
-      donations: {
-        requested: false
-        },
-      donationsSearch: {
-        requested: false,
-        placeholders: {createdSince: "Created since", succeededSince: "Succeeded since", failedSince: "Failed since"},
-        params: {createdSince: "", succeededSince: "", failedSince: ""}
-        },
-      events: {
-        requested: false,
-        placeholders: {siteSlug: "Site slug"},
-        params: {siteSlug: ""}
-        },
-      eventSingle: {
-        requested: false,
-        placeholders: {siteSlug: "Site slug", id: "Event ID"},
-        params: {siteSlug: "", id: null}
-        },
-      eventRsvps: {
-        requested: false,
-        placeholders: {siteSlug: "Site slug", id: "Event ID"},
-        params: {siteSlug: "", id: null}
-        },
-      lists: {
-        requested: false
-        },
-      listPeople: {
-        requested: false,
-        placeholders: {id: "List ID"},
-        params: {id: ""}
-        },
-      membershipSingle: {
-        requested: false,
-        placeholders: {id: "Person's ID"},
-        params: {id: ""}
-        },
-      paths: {
-        requested: false
-        },
-      people: {
-        requested: false
-        },
-      peopleCount: {
-        requested: false
-        },
-      tags: {
-        requested: false
-        },
-      tagPeople: {
-        requested: false,
-        placeholders: {tag: "Tag name"},
-        params: {tag: ""}
-      }
+  state = {
+    contactSingle: {
+      requested: false,
+      placeholders: { id: "Person's ID" },
+      params: { id: null }
+    },
+    donations: {
+      requested: false
+    },
+    donationsSearch: {
+      requested: false,
+      placeholders: { createdSince: "Created since", succeededSince: "Succeeded since", failedSince: "Failed since" },
+      params: { createdSince: "", succeededSince: "", failedSince: "" }
+    },
+    events: {
+      requested: false,
+      placeholders: { siteSlug: "Site slug" },
+      params: { siteSlug: "" }
+    },
+    eventSingle: {
+      requested: false,
+      placeholders: { siteSlug: "Site slug", id: "Event ID" },
+      params: { siteSlug: "", id: null }
+    },
+    eventRsvps: {
+      requested: false,
+      placeholders: { siteSlug: "Site slug", id: "Event ID" },
+      params: { siteSlug: "", id: null }
+    },
+    lists: {
+      requested: false
+    },
+    listPeople: {
+      requested: false,
+      placeholders: { id: "List ID" },
+      params: { id: "" }
+    },
+    membershipSingle: {
+      requested: false,
+      placeholders: { id: "Person's ID" },
+      params: { id: "" }
+    },
+    paths: {
+      requested: false
+    },
+    people: {
+      requested: false
+    },
+    peopleCount: {
+      requested: false
+    },
+    tags: {
+      requested: false
+    },
+    tagPeople: {
+      requested: false,
+      placeholders: { tag: "Tag name" },
+      params: { tag: "" }
     }
-  }
+  };
 
   render () {
 

@@ -4,26 +4,30 @@ import { Button } from 'react-bootstrap';
 
 class Report extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      contactSingle: { report: [], fileName: 'Single contact report', buttonName: 'Download the single contact report' },
-      donations: { report: [], fileName: 'Donations report', buttonName: 'Download the donations report' },
-      donationsSearch: { report: [], fileName: 'Donations search report', buttonName: 'Download the donations search report' },
-      events: { report: [], fileName: 'Events report', buttonName: 'Download the events report' },
-      eventSingle: { report: [], fileName: 'Single event report', buttonName: 'Download the single event report' },
-      eventRsvps: { report: [], fileName: 'Event RSVPs report', buttonName: 'Download the event RSVPs report' },
-      lists: { report: [], fileName: 'Lists report', buttonName: 'Download the lists report' },
-      listPeople: { report: [], fileName: 'List people report', buttonName: 'Download the list people report' },
-      membershipSingle: { report: [], fileName: 'Membership single report', buttonName: 'Download the membership single report' },
-      paths: { report: [], fileName: 'Paths report', buttonName: 'Download the paths report' },
-      people: { report: [], fileName: 'People report', buttonName: 'Download the people report' },
-      peopleCount: { report: [], fileName: 'People count report', buttonName: 'Download the people count report' },
-      tags: { report: [], fileName: 'Tags report', buttonName: 'Download the tags report' },
-      tagPeople: { report: [], fileName: 'Tag people report', buttonName: 'Download the tag people report' }
-    }
-  }
+  state = {
+    contactSingle: { report: [], fileName: 'Single contact report', buttonName: 'Download the single contact report' },
+    donations: { report: [], fileName: 'Donations report', buttonName: 'Download the donations report' },
+    donationsSearch: {
+      report: [],
+      fileName: 'Donations search report',
+      buttonName: 'Download the donations search report'
+    },
+    events: { report: [], fileName: 'Events report', buttonName: 'Download the events report' },
+    eventSingle: { report: [], fileName: 'Single event report', buttonName: 'Download the single event report' },
+    eventRsvps: { report: [], fileName: 'Event RSVPs report', buttonName: 'Download the event RSVPs report' },
+    lists: { report: [], fileName: 'Lists report', buttonName: 'Download the lists report' },
+    listPeople: { report: [], fileName: 'List people report', buttonName: 'Download the list people report' },
+    membershipSingle: {
+      report: [],
+      fileName: 'Membership single report',
+      buttonName: 'Download the membership single report'
+    },
+    paths: { report: [], fileName: 'Paths report', buttonName: 'Download the paths report' },
+    people: { report: [], fileName: 'People report', buttonName: 'Download the people report' },
+    peopleCount: { report: [], fileName: 'People count report', buttonName: 'Download the people count report' },
+    tags: { report: [], fileName: 'Tags report', buttonName: 'Download the tags report' },
+    tagPeople: { report: [], fileName: 'Tag people report', buttonName: 'Download the tag people report' }
+  };
 
   componentDidMount() {
     debugger;

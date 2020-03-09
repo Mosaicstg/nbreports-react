@@ -7,14 +7,11 @@ import Report from '../containers/Report';
 
 class Home extends Component {
 
-  constructor( props ) {
-    super( props );
-    this.state = {
-      nations: [],
-      nationSlug: "",
-      reportsWanted: []
-    }
-  }
+  state = {
+    nations: [],
+    nationSlug: "",
+    reportsWanted: []
+  };
 
   componentDidMount() {
     fetch( 'http://localhost:3001/nations' )
