@@ -3,66 +3,70 @@ import { Form, Button, Col } from 'react-bootstrap';
 
 class ReportOptions extends Component {
 
-  state = {
-    contactSingle: {
-      requested: false,
-      placeholders: { id: "Person's ID" },
-      params: { id: null }
-    },
-    donations: {
-      requested: false
-    },
-    donationsSearch: {
-      requested: false,
-      placeholders: { createdSince: "Created since", succeededSince: "Succeeded since", failedSince: "Failed since" },
-      params: { createdSince: "", succeededSince: "", failedSince: "" }
-    },
-    events: {
-      requested: false,
-      placeholders: { siteSlug: "Site slug" },
-      params: { siteSlug: "" }
-    },
-    eventSingle: {
-      requested: false,
-      placeholders: { siteSlug: "Site slug", id: "Event ID" },
-      params: { siteSlug: "", id: null }
-    },
-    eventRsvps: {
-      requested: false,
-      placeholders: { siteSlug: "Site slug", id: "Event ID" },
-      params: { siteSlug: "", id: null }
-    },
-    lists: {
-      requested: false
-    },
-    listPeople: {
-      requested: false,
-      placeholders: { id: "List ID" },
-      params: { id: "" }
-    },
-    membershipSingle: {
-      requested: false,
-      placeholders: { id: "Person's ID" },
-      params: { id: "" }
-    },
-    paths: {
-      requested: false
-    },
-    people: {
-      requested: false
-    },
-    peopleCount: {
-      requested: false
-    },
-    tags: {
-      requested: false
-    },
-    tagPeople: {
-      requested: false,
-      placeholders: { tag: "Tag name" },
-      params: { tag: "" }
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      contactSingle: {
+        requested: false,
+        placeholders: {id: "Person's ID"},
+        params: {id: null}
+        },
+      donations: {
+        requested: false
+        },
+      donationsSearch: {
+        requested: false,
+        placeholders: {createdSince: "Created since", succeededSince: "Succeeded since", failedSince: "Failed since"},
+        params: {createdSince: "", succeededSince: "", failedSince: ""}
+        },
+      events: {
+        requested: false,
+        placeholders: {siteSlug: "Site slug"},
+        params: {siteSlug: ""}
+        },
+      eventSingle: {
+        requested: false,
+        placeholders: {siteSlug: "Site slug", id: "Event ID"},
+        params: {siteSlug: "", id: null}
+        },
+      eventRsvps: {
+        requested: false,
+        placeholders: {siteSlug: "Site slug", id: "Event ID"},
+        params: {siteSlug: "", id: null}
+        },
+      lists: {
+        requested: false
+        },
+      listPeople: {
+        requested: false,
+        placeholders: {id: "List ID"},
+        params: {id: ""}
+        },
+      membershipSingle: {
+        requested: false,
+        placeholders: {id: "Person's ID"},
+        params: {id: ""}
+        },
+      paths: {
+        requested: false
+        },
+      people: {
+        requested: false
+        },
+      peopleCount: {
+        requested: false
+        },
+      tags: {
+        requested: false
+        },
+      tagPeople: {
+        requested: false,
+        placeholders: {tag: "Tag name"},
+        params: {tag: ""}
+      }
     }
-  };
+  }
 
   render () {
 
@@ -124,6 +128,7 @@ class ReportOptions extends Component {
 
     const generateParamFields = checkbox => {
       return Object.keys( this.state[ checkbox.name ].params ).map( paramKey => {
+        //debugger;
         return (
           <Col key={checkbox.name + "-" + paramKey} >
             <Form.Control size='sm' type='text' name={checkbox.name} id={paramKey.toString()} placeholder={this.state[ checkbox.name ].placeholders[paramKey]} onChange={handleChange} />
@@ -173,7 +178,7 @@ class ReportOptions extends Component {
 
     return (
       <div className="report-options">
-        <h3>What types of reports do you need for the {this.props.slug} nation?</h3>
+        <h3>What types of reports do you need for {this.props.url}?</h3>
         <Form onSubmit={e => { e.preventDefault(); this.props.handleSubmit(handleFormSubmit())} }>
             <div className="checkboxes">
               { generateCheckboxes(checkboxes) }

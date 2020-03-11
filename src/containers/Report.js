@@ -4,38 +4,63 @@ import { Button } from 'react-bootstrap';
 
 class Report extends Component {
 
-  state = {
-    contactSingle: { report: [], fileName: 'Single contact report', buttonName: 'Download the single contact report' },
-    donations: { report: [], fileName: 'Donations report', buttonName: 'Download the donations report' },
-    donationsSearch: {
-      report: [],
-      fileName: 'Donations search report',
-      buttonName: 'Download the donations search report'
-    },
-    events: { report: [], fileName: 'Events report', buttonName: 'Download the events report' },
-    eventSingle: { report: [], fileName: 'Single event report', buttonName: 'Download the single event report' },
-    eventRsvps: { report: [], fileName: 'Event RSVPs report', buttonName: 'Download the event RSVPs report' },
-    lists: { report: [], fileName: 'Lists report', buttonName: 'Download the lists report' },
-    listPeople: { report: [], fileName: 'List people report', buttonName: 'Download the list people report' },
-    membershipSingle: {
-      report: [],
-      fileName: 'Membership single report',
-      buttonName: 'Download the membership single report'
-    },
-    paths: { report: [], fileName: 'Paths report', buttonName: 'Download the paths report' },
-    people: { report: [], fileName: 'People report', buttonName: 'Download the people report' },
-    peopleCount: { report: [], fileName: 'People count report', buttonName: 'Download the people count report' },
-    tags: { report: [], fileName: 'Tags report', buttonName: 'Download the tags report' },
-    tagPeople: { report: [], fileName: 'Tag people report', buttonName: 'Download the tag people report' }
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      contactSingle: { report: [], fileName: 'Single contact report', buttonName: 'Download the single contact report' },
+      donations: { report: [], fileName: 'Donations report', buttonName: 'Download the donations report' },
+      donationsSearch: { report: [], fileName: 'Donations search report', buttonName: 'Download the donations search report' },
+      events: { report: [], fileName: 'Events report', buttonName: 'Download the events report' },
+      eventSingle: { report: [], fileName: 'Single event report', buttonName: 'Download the single event report' },
+      eventRsvps: { report: [], fileName: 'Event RSVPs report', buttonName: 'Download the event RSVPs report' },
+      lists: { report: [], fileName: 'Lists report', buttonName: 'Download the lists report' },
+      listPeople: { report: [], fileName: 'List people report', buttonName: 'Download the list people report' },
+      membershipSingle: { report: [], fileName: 'Membership single report', buttonName: 'Download the membership single report' },
+      paths: { report: [], fileName: 'Paths report', buttonName: 'Download the paths report' },
+      people: { report: [], fileName: 'People report', buttonName: 'Download the people report' },
+      peopleCount: { report: [], fileName: 'People count report', buttonName: 'Download the people count report' },
+      tags: { report: [], fileName: 'Tags report', buttonName: 'Download the tags report' },
+      tagPeople: { report: [], fileName: 'Tag people report', buttonName: 'Download the tag people report' }
+    }
+  }
 
   componentDidMount() {
-    debugger;
-    // *Functionality is currently broken, as we are no longer passing nation tokens down*
-    // We are passing down the nation slug and the reports we want with param values via props
-    // From here, we can rework this component completely (and refactor quite a bit!)
-    // We need to make API calls to our Rails server based on the reports we want
-    // The Rails server will need to be built out with endpoints for each report
+
+    //const fetchApi = (apiEndpoint, reportName, apiPromises) => {
+    //  let nextApiEndpoint = `https://cors-anywhere.herokuapp.com/${this.props.url}`;
+    //
+    //  fetch( apiEndpoint )
+    //    .then( resp => resp.json())
+    //    .then( json => {
+    //      if (json.results) {
+    //        apiPromises.push( json.results );
+    //      } else if (json.event) {
+    //        apiPromises.push( json.event )
+    //      } else {
+    //        apiPromises.push( json )
+    //      }
+    //
+    //      if (json.next) {
+    //        nextApiEndpoint += json.next;
+    //        nextApiEndpoint += `&access_token=${this.props.token}`;
+    //
+    //        fetchApi(nextApiEndpoint, reportName, apiPromises)
+    //      }
+    //      Promise.all(apiPromises)
+    //    })
+    //    .then( data => {
+    //      debugger
+    //      Papa.unparse( data )
+    //    })
+    //    .then( csv => {
+    //      let csvFile = "data:text/csv;charset=utf-8," + csv;
+    //      this.setState( prevState => ({
+    //        [reportName]: { ...prevState[reportName], report: csvFile }
+    //      }))
+    //    })
+    //    .catch( error => console.log( "Error: ", error ) )
+    //};
 
     let arr = [];
 

@@ -8,11 +8,11 @@ function NationsDropdown(props) {
     if ( props.nations.length > 0 ) {
       dropdownItems = props.nations.map( nation => (
         <Dropdown.Item
-          key={nation}
+          key={nation.id}
           as="button"
-          onClick={() => props.handleClick(nation)}
+          onClick={() => props.handleClick( nation.title.rendered, nation.access_token )}
         >
-          {nation}
+          {nation.title.rendered}
         </Dropdown.Item>
       ) );
     }

@@ -7,31 +7,30 @@ import Report from '../containers/Report';
 
 class Home extends Component {
 
-  state = {
-    nations: [],
-    nationSlug: "",
-    reportsWanted: []
-  };
+  constructor( props ) {
+    super( props );
+    this.state = {
+      nations: {},
+      nationUrl: "",
+      nationToken: "",
+      reportsWanted: []
+    }
+  }
 
   componentDidMount() {
-    fetch( 'http://localhost:3001/nations' )
+    fetch( 'http://localhost/wp_nbreports/wp-json/wp/v2/nations' )
       .then( resp => resp.json() )
-      .then( data => {
-        let nations = [];
-        data.forEach( nation => {
-          nations.push(nation.slug)
-        });
-        this.setState( { nations: nations } )
-      } )
+      .then( data => this.setState( { nations: data } ) )
   }
 
   render() {
     let reportOptions;
     let report;
 
-    const handleDropdownClick = ( slug ) => {
+    const handleDropdownClick = ( url, token ) => {
       this.setState( {
-        nationSlug: slug
+        nationUrl: url,
+        nationToken: token
       })
     };
 
@@ -41,11 +40,12 @@ class Home extends Component {
       })
     };
 
-    if ( this.state.nationSlug.length > 0 ) {
+    if ( this.state.nationUrl.length > 0 && this.state.nationToken.length > 0 ) {
       reportOptions = (
         <div className="report-options">
           <ReportOptions
-            slug={this.state.nationSlug}
+            url={this.state.nationUrl}
+            token={this.state.nationToken}
             handleSubmit={handleReportsSubmit}
           />
         </div>
@@ -54,7 +54,8 @@ class Home extends Component {
 
     if ( this.state.reportsWanted.length > 0 ) {
       report = <Report
-        url={this.state.nationSlug}
+        url={this.state.nationUrl}
+        token={this.state.nationToken}
         reportsWanted={this.state.reportsWanted}
       />
     }
